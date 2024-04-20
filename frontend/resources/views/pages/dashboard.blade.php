@@ -70,6 +70,18 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card w-auto count-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <i class="fas fa-book fa-3x text-secondary mr-3"></i>
+                        <div>
+                            <h2 class="card-title text-bold">INVOICES</h2>
+                            <p class="card-text">{{ $invoiceCount }} Records(s)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="card mt-12">
