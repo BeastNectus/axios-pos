@@ -1,0 +1,87 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+    box-sizing: border-box;
+    padding: 0rem;
+    margin: 0; 
+}
+
+.custom-dark{
+    background-color: #f0eafe;
+}
+
+.count-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.count-card:hover {
+    transform: translateY(-5px);
+}
+
+.page-link {
+    background-color: #190C3D;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 0 2px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+
+.page-item.active .page-link {
+    background-color: #FF5733;
+    border-color: #FF5733;
+    color: white;
+}
+
+
+.page-link:hover {
+    background-color: #5A2D9D;
+    color: white;
+    cursor: pointer;
+}
+
+
+.page-item.disabled .page-link {
+    background-color: #706592;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 0 2px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.orange {
+    background-color: orange;
+}
+
+#myTab li a.active {
+    background-color: #FF5733;
+    color: white;
+}
+
+.login-btn {
+    background-color: #FF5733 !important;
+    color: white !important;
+}
+
+.login-btn:hover {
+    background-color: white !important;
+    color: #FF5733 !important;
+}
+
+.register-btn {
+    background-color: #FF5733 !important;
+    color: white !important;
+}
+
+.register-btn:hover {
+    background-color: white !important;
+    color: #FF5733 !important;
+}
