@@ -9,7 +9,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#addModal">+</button>
             </div>
-            <table class="table-bordered table"
+            <table class="table-bordered table nowrap"
                    id="managerTable"
                    style="width: 100%">
                 <thead>
@@ -42,15 +42,15 @@
                                     {{ $employee->last_name }}
                                 @endif
                             </td>
-                            <td class="d-flex justify-content-center gap-5">
-                                <button class="btn btn-primary edit-btn"
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-primary edit-btn"
                                         data-index="{{ $index }}"
                                         data-user-id="{{ $user->id }}"
                                         data-bs-toggle="modal"
                                         data-bs-target="#editModal{{ $index }}">
                                     <i class="fas fa-edit"></i> EDIT
                                 </button>
-                                <button class="btn btn-danger delete-btn"
+                                <button class="btn btn-sm btn-danger delete-btn"
                                         data-user-id="{{ $user->id }}">
                                     <i class="fas fa-trash"></i> DELETE
                                 </button>
@@ -177,7 +177,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#addModal">+</button>
             </div>
-            <table class="table-bordered table"
+            <table class="table-bordered table nowrap"
                    id="userTable"
                    style="width: 100%">
                 <thead>
@@ -210,15 +210,15 @@
                                     {{ $employee->last_name }}
                                 @endif
                             </td>
-                            <td class="d-flex justify-content-center gap-5">
-                                <button class="btn btn-primary edit-btn"
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-primary edit-btn"
                                         data-index="{{ $index }}"
                                         data-user-id="{{ $user->id }}"
                                         data-bs-toggle="modal"
                                         data-bs-target="#editModal{{ $index }}">
                                     <i class="fas fa-edit"></i> EDIT
                                 </button>
-                                <button class="btn btn-danger delete-btn"
+                                <button class="btn btn-sm btn-danger delete-btn"
                                         data-user-id="{{ $user->id }}">
                                     <i class="fas fa-trash"></i> DELETE
                                 </button>
@@ -414,8 +414,12 @@
     <!-- END ADD MODAL -->
     <script>
         $(document).ready(function() {
-            $('#userTable').DataTable();
-            $('#managerTable').DataTable();
+            $('#userTable').DataTable({
+                responsive: true
+            });
+            $('#managerTable').DataTable({
+                responsive: true
+            });
 
             $(document).on('click', '.delete-btn', function() {
                 var userId = $(this).data('user-id');

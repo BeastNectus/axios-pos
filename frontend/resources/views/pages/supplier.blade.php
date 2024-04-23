@@ -29,8 +29,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#addModal">+</button>
             </div>
-            <div class="table-responsive">
-                <table class="table-bordered table"
+                <table class="table-bordered table nowrap"
                        id="supplierTable"
                        style="width: 100%">
                     <thead>
@@ -45,15 +44,15 @@
                             <tr>
                                 <td class="text-left align-middle">{{ $supplier->company_name }}</td>
                                 <td class="text-left align-middle">{{ $supplier->contact_number }}</td>
-                                <td class="d-flex justify-content-center gap-5">
-                                    <button class="btn btn-primary edit-btn"
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-primary edit-btn"
                                             data-index="{{ $index }}"
                                             data-supplier-id="{{ $supplier->id }}"
                                             data-bs-toggle="modal"
                                             data-bs-target="#editModal{{ $index }}">
                                         <i class="fas fa-edit"></i> EDIT
                                     </button>
-                                    <button class="btn btn-danger delete-btn"
+                                    <button class="btn btn-sm btn-danger delete-btn"
                                             data-supplier-id="{{ $supplier->id }}">
                                         <i class="fas fa-trash"></i> DELETE
                                     </button>
@@ -123,7 +122,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
         </div>
     </div>
 
@@ -184,7 +182,9 @@
 
     <script>
         $(document).ready(function() {
-            $('#supplierTable').DataTable();
+            $('#supplierTable').DataTable({
+                responsive: true
+            });
             $('.edit-btn').click(function() {
                 var index = $(this).data('index');
                 var companyName = $('#editCompanyName' + index).val();

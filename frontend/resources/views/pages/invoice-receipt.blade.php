@@ -8,7 +8,7 @@
                     <div class="card-header bg-dark text-white">INVOICE RECEIPT</div>
 
                     <div class="card-body">
-                        <div class="mb-3 d-flex justify-content-between">
+                        <div class="mb-3 d-flex justify-content-between flex-wrap">
                             <div>
                                 <h5><strong>Invoice Number:</strong> {{ $invoice->invoice_id }}</h5>
                             </div>
@@ -20,7 +20,7 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered">
+                        <table class="table table-bordered nowrap" id="invoiceReceiptTable" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
@@ -49,6 +49,15 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#invoiceReceiptTable').DataTable({
+                responsive: true,
+                searching: false,
+                paging: false
+            });
+        });
+    </script>
 @endsection
 
 @push('styles')

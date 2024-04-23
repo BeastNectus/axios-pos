@@ -29,7 +29,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#addModal">+</button>
             </div>
-            <table class="table-bordered table"
+            <table class="table-bordered table nowrap"
                    id="productTable"
                    style="width: 100%">
                 <thead>
@@ -54,15 +54,15 @@
                                     @endif
                                 @endforeach
                             </td>
-                            <td class="d-flex justify-content-center gap-2">
-                                <button class="btn btn-primary edit-btn"
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-primary edit-btn"
                                         data-index="{{ $index }}"
                                         data-product-id="{{ $product->id }}"
                                         data-bs-toggle="modal"
                                         data-bs-target="#editModal{{ $index }}">
                                     <i class="fas fa-edit"></i> EDIT
                                 </button>
-                                <button class="btn btn-danger delete-btn"
+                                <button class="btn btm-sm btn-danger delete-btn"
                                         data-product-id="{{ $product->id }}">
                                     <i class="fas fa-trash"></i> DELETE
                                 </button>
@@ -213,7 +213,7 @@
                                                            class="form-control"
                                                            id="editDateStockIn{{ $index }}"
                                                            name="date_stock_in"
-                                                           value="{{ $product->date_stock_in }}">
+                                                           value="{{ date('Y-m-d', strtotime($product->date_stock_in)) }}">
                                                 </div>
                                             </div>
 
@@ -355,6 +355,7 @@
     <script>
         $(document).ready(function() {
             $('#productTable').DataTable({
+                responsive: true,
                 "order": [
                     [1, 'asc']
                 ]

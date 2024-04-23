@@ -85,3 +85,7 @@
     background-color: white !important;
     color: #FF5733 !important;
 }
+
+td ul li {
+    text-wrap: wrap;
+}

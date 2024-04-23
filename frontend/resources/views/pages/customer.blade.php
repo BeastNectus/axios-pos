@@ -30,7 +30,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#addModal">+</button>
             </div>
-            <table class="table-bordered table"
+            <table class="table-bordered nowrap table"
                    id="customerTable"
                    style="width: 100%">
                 <thead>
@@ -38,7 +38,7 @@
                         <th class="text-left align-middle">First Name</th>
                         <th class="text-left align-middle">Last Name</th>
                         <th class="text-left align-middle">Contact Number</th>
-                        <th class="text-left align-middle">Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,15 +47,15 @@
                             <td class="text-left align-middle">{{ $customer->first_name }}</td>
                             <td class="text-left align-middle">{{ $customer->last_name }}</td>
                             <td class="text-left align-middle">{{ $customer->contact_number }}</td>
-                            <td class="d-flex justify-content-center gap-5">
-                                <button class="btn btn-primary edit-btn"
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-primary edit-btn"
                                         data-index="{{ $index }}"
                                         data-customer-id="{{ $customer->id }}"
                                         data-bs-toggle="modal"
                                         data-bs-target="#editModal{{ $index }}">
                                     <i class="fas fa-edit"></i> EDIT
                                 </button>
-                                <button class="btn btn-danger delete-btn"
+                                <button class="btn btn-sm btn-danger delete-btn"
                                         data-customer-id="{{ $customer->id }}">
                                     <i class="fas fa-trash"></i> DELETE
                                 </button>
@@ -145,6 +145,7 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 
@@ -211,7 +212,9 @@
     <!-- END ADD MODAL -->
     <script>
         $(document).ready(function() {
-            $('#customerTable').DataTable();
+            $('#customerTable').DataTable({
+                responsive: true,
+            });
 
             $(document).on('click', '.delete-btn', function() {
                 var customerId = $(this).data('customer-id');

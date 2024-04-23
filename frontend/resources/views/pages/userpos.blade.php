@@ -49,47 +49,48 @@
                          id="category-{{ $category->id }}"
                          role="tabpanel"
                          aria-labelledby="category-{{ $category->id }}-tab">
-                        <div class="table-responsive">
-                            <table id="dataTable_{{ $category->id }}"
-                                   class="table-bordered table"
-                                   style="width: 100%">
-                                <thead>
+
+                        <table id="dataTable_{{ $category->id }}"
+                               class="table-bordered nowrap table"
+                               style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th class="text-left align-middle">Name</th>
+                                    <th class="text-left align-middle">Description</th>
+                                    <th class="text-left align-middle">Price</th>
+                                    <th class="text-left align-middle">Stock</th>
+                                    <th class="text-left align-middle">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($productsByCategory[$category->id] as $product)
                                     <tr>
-                                        <th class="text-left align-middle">Name</th>
-                                        <th class="text-left align-middle">Description</th>
-                                        <th class="text-left align-middle">Price</th>
-                                        <th class="text-left align-middle">Stock</th>
-                                        <th class="text-left align-middle">Action</th>
+                                        <td class="text-left align-middle">{{ $product->name }}</td>
+                                        <td class="text-left align-middle">{{ $product->description }}</td>
+                                        <td class="text-left align-middle">₱{{ $product->price }}</td>
+                                        <td class="text-left align-middle">
+                                            @if ($product->qty_stock > 0)
+                                                {{ $product->qty_stock }}
+                                            @else
+                                                Out of Stock
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($product->qty_stock > 0)
+                                                <button type="button"
+                                                        class="btn btn-sm btn-success add-to-cart"
+                                                        style="width: 100%"
+                                                        data-product-id="{{ $product->id }}"
+                                                        data-product-name="{{ $product->name }}"
+                                                        data-product-price="{{ $product->price }}"><i
+                                                       class="fas fa-plus"></i></button>
+                                            @endif
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($productsByCategory[$category->id] as $product)
-                                        <tr>
-                                            <td class="text-left align-middle">{{ $product->name }}</td>
-                                            <td class="text-left align-middle">{{ $product->description }}</td>
-                                            <td class="text-left align-middle">₱{{ $product->price }}</td>
-                                            <td class="text-left align-middle">
-                                                @if ($product->qty_stock > 0)
-                                                    {{ $product->qty_stock }}
-                                                @else
-                                                    Out of Stock
-                                                @endif
-                                            </td>
-                                            <td class="text-left align-middle">
-                                                @if ($product->qty_stock > 0)
-                                                    <button type="button"
-                                                            class="btn btn-success add-to-cart"
-                                                            style="width: 100%"
-                                                            data-product-id="{{ $product->id }}"
-                                                            data-product-name="{{ $product->name }}"
-                                                            data-product-price="{{ $product->price }}"><i class="fas fa-plus"></i></button>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
                 @endforeach
             </div>
@@ -102,7 +103,9 @@
                 <h5 class="card-title text-bold">POINT OF SALE</h5>
             </div>
             <div class="table-responsive">
-                <table class="table-bordered table"
+
+
+                <table class="table-bordered nowrap table"
                        id="pointOfSaleTable"
                        style="width: 100%">
                     <thead>
@@ -160,16 +163,17 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div class="mt-3 text-right">
-                    <button type="button"
-                            class="btn btn-primary"
-                            id="submitInvoiceBtn">Submit</button>
-                </div>
             </div>
+            <div class="mt-3 text-right">
+                <button type="button"
+                        class="btn btn-sm btn-primary"
+                        id="submitInvoiceBtn">Submit</button>
+            </div>
+
         </div>
     </div>
 
-    
+
 
     <script>
         $(document).ready(function() {
@@ -177,6 +181,7 @@
                 var activeTabId = $('#myTab .nav-link.active').attr('aria-controls').split("-").pop();
                 $('#dataTable_' + activeTabId).DataTable({
                     "pageLength": 5,
+                    responsive: true
                 });
             }
             initializeActiveTabDataTable();
@@ -185,6 +190,7 @@
                 var categoryId = $(e.target).attr("aria-controls").split("-").pop();
                 $('#dataTable_' + categoryId).DataTable({
                     "pageLength": 5,
+                    responsive: true,
                     "destroy": true
                 });
             });
@@ -332,7 +338,8 @@
                                 if (response.invoice_ids.length > 0) {
                                     var invoiceId = response.invoice_ids[0];
 
-                                    window.location.href = '/invoice-receipt/' + encodeURIComponent(invoiceId);
+                                    window.location.href = '/invoice-receipt/' +
+                                        encodeURIComponent(invoiceId);
                                 } else {
                                     alert('No invoice IDs returned in the response');
                                 }

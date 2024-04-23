@@ -29,156 +29,154 @@
                         data-bs-toggle="modal"
                         data-bs-target="#addModal">+</button>
             </div>
-            <div class="table-responsive">
-                <table class="table-bordered table"
-                       id="employeeTable"
-                       style="width: 100%">
-                    <thead>
+            <table class="table-bordered table nowrap"
+                   id="employeeTable"
+                   style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Contact Number</th>
+                        <th>Gender</th>
+                        <th>Hired</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($employees as $index => $employee)
                         <tr>
-                            <th class="text-nowrap text-left align-middle">First Name</th>
-                            <th class="text-nowrap text-left align-middle">Last Name</th>
-                            <th class="text-left align-middle">Email</th>
-                            <th class="text-nowrap text-left align-middle">Contact Number</th>
-                            <th class="text-left align-middle">Gender</th>
-                            <th class="text-left align-middle">Hired</th>
-                            <th class="text-left align-middle">Action</th>
+                            <td>{{ $employee->first_name }}</td>
+                            <td>{{ $employee->last_name }}</td>
+                            <td>{{ $employee->email }}</td>
+                            <td>{{ $employee->contact_number }}</td>
+                            <td>{{ $employee->gender }}</td>
+                            <td>{{ $employee->hired_date }}</td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-primary btn-sm edit-btn"
+                                        data-index="{{ $index }}"
+                                        data-employee-id="{{ $employee->id }}"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editModal{{ $index }}">
+                                    <i class="fas fa-edit"></i> EDIT
+                                </button>
+                                <button class="btn btn-sm btn-danger btn-sm delete-btn"
+                                        data-employee-id="{{ $employee->id }}">
+                                    <i class="fas fa-trash"></i> DELETE
+                                </button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($employees as $index => $employee)
-                            <tr>
-                                <td class="text-left align-middle">{{ $employee->first_name }}</td>
-                                <td class="text-left align-middle">{{ $employee->last_name }}</td>
-                                <td class="text-left align-middle">{{ $employee->email }}</td>
-                                <td class="text-left align-middle">{{ $employee->contact_number }}</td>
-                                <td class="text-left align-middle">{{ $employee->gender }}</td>
-                                <td class="text-left align-middle">{{ $employee->hired_date }}</td>
-                                <td class="d-flex justify-content-center gap-5">
-                                    <button class="btn btn-primary btn-sm edit-btn"
-                                            data-index="{{ $index }}"
-                                            data-employee-id="{{ $employee->id }}"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editModal{{ $index }}">
-                                        <i class="fas fa-edit"></i> EDIT
-                                    </button>
-                                    <button class="btn btn-danger btn-sm delete-btn"
-                                            data-employee-id="{{ $employee->id }}">
-                                        <i class="fas fa-trash"></i> DELETE
-                                    </button>
-                                </td>
-                            </tr>
-                            <!-- EDIT MODAL -->
-                            <div class="modal fade edit-modal"
-                                 id="editModal{{ $index }}"
-                                 tabindex="-1"
-                                 role="dialog"
-                                 data-index="{{ $index }}"
-                                 aria-labelledby="editModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog"
-                                     role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Edit Employee</h5>
-                                            <button type="button"
-                                                    class="close"
-                                                    data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="editEmployeeForm{{ $index }}"
-                                                  class="edit-employee-form"
-                                                  action="{{ route('updateEmployee') }}"
-                                                  method="POST">
-                                                @csrf
-                                                <input type="hidden"
-                                                       name="employee_id"
-                                                       value="{{ $employee->id }}">
-                                                <div class="form-group">
-                                                    <label for="edit_first_name">First Name</label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="edit_first_name{{ $index }}"
-                                                           name="first_name"
-                                                           placeholder="First Name"
-                                                           value="{{ $employee->first_name }}"
-                                                           required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_last_name">Last Name</label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="edit_last_name{{ $index }}"
-                                                           name="last_name"
-                                                           placeholder="Last Name"
-                                                           value="{{ $employee->last_name }}"
-                                                           required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_email">Email</label>
-                                                    <input type="email"
-                                                           class="form-control"
-                                                           id="edit_email{{ $index }}"
-                                                           name="email"
-                                                           placeholder="Email"
-                                                           value="{{ $employee->email }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_gender">Gender</label>
-                                                    <select class="form-control"
-                                                            id="edit_gender{{ $index }}"
-                                                            name="gender"
-                                                            required>
-                                                        <option value="Male"
-                                                                {{ $employee->gender == 'Male' ? 'selected' : '' }}>Male
-                                                        </option>
-                                                        <option value="Female"
-                                                                {{ $employee->gender == 'Female' ? 'selected' : '' }}>
-                                                            Female
-                                                        </option>
-                                                        <option value="Other"
-                                                                {{ $employee->gender == 'Other' ? 'selected' : '' }}>Other
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_hired_date">Hired Date</label>
-                                                    <input type="date"
-                                                           class="form-control"
-                                                           id="edit_hired_date{{ $index }}"
-                                                           name="hired_date"
-                                                           value="{{ date('Y-m-d', strtotime($employee->hired_date)) }}"
-                                                           required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_contact_number">Contact Number</label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="edit_contact_number{{ $index }}"
-                                                           name="contact_number"
-                                                           placeholder="Contact Number"
-                                                           value="{{ $employee->contact_number }}"
-                                                           required>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button"
-                                                            class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit"
-                                                            class="btn btn-primary">Update</button>
-                                                </div>
-                                            </form>
-                                        </div>
+                        <!-- EDIT MODAL -->
+                        <div class="modal fade edit-modal"
+                             id="editModal{{ $index }}"
+                             tabindex="-1"
+                             role="dialog"
+                             data-index="{{ $index }}"
+                             aria-labelledby="editModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog"
+                                 role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Employee</h5>
+                                        <button type="button"
+                                                class="close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="editEmployeeForm{{ $index }}"
+                                              class="edit-employee-form"
+                                              action="{{ route('updateEmployee') }}"
+                                              method="POST">
+                                            @csrf
+                                            <input type="hidden"
+                                                   name="employee_id"
+                                                   value="{{ $employee->id }}">
+                                            <div class="form-group">
+                                                <label for="edit_first_name">First Name</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="edit_first_name{{ $index }}"
+                                                       name="first_name"
+                                                       placeholder="First Name"
+                                                       value="{{ $employee->first_name }}"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit_last_name">Last Name</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="edit_last_name{{ $index }}"
+                                                       name="last_name"
+                                                       placeholder="Last Name"
+                                                       value="{{ $employee->last_name }}"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit_email">Email</label>
+                                                <input type="email"
+                                                       class="form-control"
+                                                       id="edit_email{{ $index }}"
+                                                       name="email"
+                                                       placeholder="Email"
+                                                       value="{{ $employee->email }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit_gender">Gender</label>
+                                                <select class="form-control"
+                                                        id="edit_gender{{ $index }}"
+                                                        name="gender"
+                                                        required>
+                                                    <option value="Male"
+                                                            {{ $employee->gender == 'Male' ? 'selected' : '' }}>Male
+                                                    </option>
+                                                    <option value="Female"
+                                                            {{ $employee->gender == 'Female' ? 'selected' : '' }}>
+                                                        Female
+                                                    </option>
+                                                    <option value="Other"
+                                                            {{ $employee->gender == 'Other' ? 'selected' : '' }}>Other
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit_hired_date">Hired Date</label>
+                                                <input type="date"
+                                                       class="form-control"
+                                                       id="edit_hired_date{{ $index }}"
+                                                       name="hired_date"
+                                                       value="{{ date('Y-m-d', strtotime($employee->hired_date)) }}"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit_contact_number">Contact Number</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="edit_contact_number{{ $index }}"
+                                                       name="contact_number"
+                                                       placeholder="Contact Number"
+                                                       value="{{ $employee->contact_number }}"
+                                                       required>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"
+                                                        class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                <button type="submit"
+                                                        class="btn btn-primary">Update</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <!-- END MODAL -->
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </div>
+                        <!-- END MODAL -->
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -273,7 +271,9 @@
 
     <script>
         $(document).ready(function() {
-            $('#employeeTable').DataTable();
+            $('#employeeTable').DataTable({
+                responsive: true
+            });
             $('.edit-btn').click(function() {
                 var index = $(this).data('index');
                 var firstName = $('#editFirstName' + index).val();
