@@ -72,7 +72,7 @@
             <div class="flex gap-1 justify-center mt-5">
                 <p class="text-sm text-gray-400">Not yet registered? </p>
                 <a class="text-sm text-gray-400 underline hover:text-orange-500"
-                   href="{{ route('password.request') }}">
+                   href="{{ route('register') }}">
                     {{ __('Create an account') }}
                 </a>
             </div>

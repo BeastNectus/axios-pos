@@ -29,7 +29,8 @@
                 @if (auth()->user()->user_type == 3)
                     <li class="nav-item has-treeview">
                         <a href="{{ route('userHome') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('userHome') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('userHome') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-house"></i>
                             <p>
                                 Point of Sale
@@ -43,7 +44,8 @@
                 @if (auth()->user()->user_type != 3)
                     <li class="nav-item has-treeview">
                         <a href="{{ route('dashboard') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('dashboard') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-house"></i>
                             <p>
                                 Dashboard
@@ -53,7 +55,8 @@
                     <hr class="opacity-35 mb-2 mt-2 border-t border-white">
                     <li class="nav-item has-treeview">
                         <a href="{{ route('customer') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('customer') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('customer') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-user-alt"></i>
                             <p>
                                 Customer
@@ -63,7 +66,8 @@
                     <hr class="opacity-35 mb-2 mt-2 border-t border-white">
                     <li class="nav-item has-treeview">
                         <a href="{{ route('employee') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('employee') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('employee') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Employee
@@ -73,7 +77,8 @@
                     <hr class="opacity-35 mb-2 mt-2 border-t border-white">
                     <li class="nav-item has-treeview">
                         <a href="{{ route('product') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('product') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('product') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-box-archive"></i>
                             <p>
                                 Product
@@ -83,7 +88,8 @@
                     <hr class="opacity-35 mb-2 mt-2 border-t border-white">
                     <li class="nav-item has-treeview">
                         <a href="{{ route('inventory') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('inventory') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('inventory') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-folder"></i>
                             <p>
                                 Inventory
@@ -93,7 +99,8 @@
                     <hr class="opacity-35 mb-2 mt-2 border-t border-white">
                     <li class="nav-item has-treeview">
                         <a href="{{ route('invoice') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('invoice') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('invoice') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-book"></i>
                             <p>
                                 Invoices
@@ -103,7 +110,8 @@
                     <hr class="opacity-35 mb-2 mt-2 border-t border-white">
                     <li class="nav-item has-treeview">
                         <a href="{{ route('supplier') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('supplier') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('supplier') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-boxes-packing"></i>
                             <p>
                                 Supplier
@@ -113,7 +121,8 @@
                     <hr class="opacity-35 mb-2 mt-2 border-t border-white">
                     <li class="nav-item has-treeview">
                         <a href="{{ route('accounts') }}"
-                           class="nav-link">
+                           class="nav-link {{ request()->routeIs('accounts') ? 'active' : '' }}"
+                           style="{{ request()->routeIs('accounts') ? 'background-color: white; color: black;' : '' }}">
                             <i class="nav-icon fas fa-address-book"></i>
                             <p>
                                 Accounts

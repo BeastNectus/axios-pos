@@ -219,12 +219,12 @@
                 <div
                      class="container-fluid mx-auto flex w-full flex-row flex-wrap-reverse gap-10 md:mt-5 lg:mx-0 lg:flex-nowrap">
                     <div class="container flex flex-col justify-center py-5">
-                        <h5 class="text-white">Point of Sale System</h5>
-                        <h2 class="height text-4xl font-bold tracking-tight text-white sm:text-6xl">Empowering Businesses
-                            <br />with Axios POS
+                        <h5 class="text-white">Integrated Point of Sale and Inventory System</h5>
+                        <h2 class="height text-2xl font-bold tracking-tight text-white sm:text-3xl">Empowering Businesses with Advanced POS & Inventory Management
+                            <br />by Axios POS
                         </h2>
                         <p class="mt-6 text-lg leading-8 text-gray-300">
-                            Axios POS is revolutionizing the way businesses operate, providing seamless and efficient solutions for managing sales, inventory, and customer relationships. Join us in transforming your business and unlocking its full potential with Axios POS.
+                            Axios POS combines powerful sales capabilities with robust inventory management to streamline business operations. Experience seamless transactions, precise inventory tracking, and enhanced customer relationship management, all integrated into one solution with Axios POS.
                         </p>
                         <div class="mt-5 flex gap-5">
                             @if (Route::has('login'))
